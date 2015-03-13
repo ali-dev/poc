@@ -13,6 +13,7 @@
         "doctrine/doctrine-orm-module": "0.7.*",
         "zendframework/zend-developer-tools": "dev-master",
         "zendframework/zftool": "dev-master",
-        "hounddog/doctrine-data-fixture-module": "0.0.*"
+        "hounddog/doctrine-data-fixture-module": "0.0.*",
+        "socalnick/scn-social-auth-doctrine-orm": "~1.4"
     }
 }

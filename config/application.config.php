@@ -6,6 +6,8 @@ return array(
         'DoctrineModule',
         'DoctrineORMModule',
         'DoctrineDataFixtureModule',
+        'ZfcBase',
+        'ZfcUser',
         'Application',
     ),
 
