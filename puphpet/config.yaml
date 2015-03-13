@@ -92,14 +92,14 @@ apache:
             servername: poc.speakaboos.dev
             serveraliases:
                 - poc.speakaboos.dev
-            docroot: /var/www/web
+            docroot: /var/www/public
             port: '80'
             setenv:
-                - 'SYMFONY_ENV dev'
+                - 'APPLICATION_ENV development'
             directories:
                 invav6aqc5m1:
                     provider: directory
-                    path: /var/www/web
+                    path: /var/www/public
                     options:
                         - Indexes
                         - FollowSymlinks
@@ -145,7 +145,7 @@ nginx:
             ssl_key: ''
 php:
     install: '1'
-    version: '56'
+    version: '55'
     composer: '1'
     composer_home: ''
     modules:
@@ -212,8 +212,9 @@ python:
             version: ''
 mysql:
     install: '1'
-    override_options: {  }
-    root_password: speakaboos
+    settings:
+        override_options: {  }
+        root_password: 123
     adminer: 0
     databases:
         tyaitJu0GdS6:
@@ -232,6 +233,7 @@ mysql:
             user: speakaboos
             password: speakaboos
             sql_file: ''
+    root_password: speakaboos
 postgresql:
     install: '0'
     settings:
@@ -243,11 +245,13 @@ postgresql:
     adminer: 0
 mariadb:
     install: '0'
-    override_options: {  }
-    root_password: '123'
+    settings:
+        override_options: {  }
+        root_password: 123
     adminer: 0
     databases: {  }
     version: '10.0'
+    root_password: '123'
 sqlite:
     install: '0'
     adminer: 0
@@ -295,6 +299,6 @@ elastic_search:
 solr:
     install: '1'
     settings:
-        version: 4.10.2
+        version: 4.10.0
         port: '8983'
 
