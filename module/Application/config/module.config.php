@@ -111,7 +111,11 @@ return array(
                 'drivers' => array(
                     'Application\Entity' => 'application_entities'
                 )
-            )
-        )
+            ),
+
+        ),
+    ),
+    'data-fixture' => array(
+        'location' => __DIR__ . '/../src/Application/Fixture',
     )
 );

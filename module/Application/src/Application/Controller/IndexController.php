@@ -11,11 +11,25 @@ namespace Application\Controller;
 
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
+use \Application\Entity\Video;
 
 class IndexController extends AbstractActionController
 {
     public function indexAction()
     {
+
+        $objectManager = $this
+            ->getServiceLocator()
+            ->get('Doctrine\ORM\EntityManager');
+        var_dump($objectManager); exit;
+        $video = new Video();
+        $video->setTitle("Speakaboos Video");
+        $video->setFileName('small');
+
+        $this->entity()->persist($video);
+//        $this->entity()->flush();
+        exit;
+//        exit;
         return new ViewModel();
     }
 }
