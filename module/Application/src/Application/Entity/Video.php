@@ -3,12 +3,15 @@ namespace Application\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use Zend\InputFilter\InputFilter;
+use Zend\InputFilter\InputFilterAwareInterface;
+use Zend\InputFilter\InputFilterInterface;
 
 /**
  * @ORM\Entity
  * @ORM\Table(name="video")
  */
-class Video
+class Video implements InputFilterAwareInterface
 {
     /**
      * @ORM\Id
@@ -47,6 +50,8 @@ class Video
      * @var VideoTag
      **/
     private $userVideos;
+
+    protected $inputFilter;
 
 
     public function __construct() {
@@ -135,6 +140,62 @@ class Video
     {
         $this->videoTags->add($videoTag);
     }
+
+    /**
+     * @param \Application\Entity\VideoTag $videoTags
+     */
+    public function setVideoTags($videoTags)
+    {
+        $this->videoTags = $videoTags;
+    }
+
+    /**
+     * @return \Application\Entity\VideoTag
+     */
+    public function getVideoTags()
+    {
+        return $this->videoTags;
+    }
+
+    public function getInputFilter()
+    {
+        if (!$this->inputFilter) {
+            $inputFilter = new InputFilter();
+
+
+
+            $inputFilter->add(array(
+                'name'     => 'title',
+                'required' => true,
+                'filters'  => array(
+                    array('name' => 'StripTags'),
+                    array('name' => 'StringTrim'),
+                ),
+                'validators' => array(
+                    array(
+                        'name'    => 'StringLength',
+                        'options' => array(
+                            'encoding' => 'UTF-8',
+                            'min'      => 1,
+                            'max'      => 100,
+                        ),
+                    ),
+                ),
+            ));
+
+            $this->inputFilter = $inputFilter;
+        }
+
+        return $this->inputFilter;
+    }
+
+    // Add content to these methods:
+    public function setInputFilter(InputFilterInterface $inputFilter)
+    {
+        throw new \Exception("Not used");
+    }
+
+
 
 
 }

@@ -1,79 +1,60 @@
 <?php
 namespace Application\Controller;
 
-use Application\Form\EditVideo;
+use Application\Form\EditTag;
 use Zend\Http\Response;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
-use \Application\Entity\Video;
+use \Application\Entity\Tag;
 use \Doctrine\Orm\EntityManager;
 
 /**
- * Video Controller - List, view, edit and vtt actions
+ * Tags Controller - List, edit actions
  *
  * @package \Application\Controller
  */
-class VideoController extends AbstractActionController
+class TagController extends AbstractActionController
 {
-
     /**
-     * List videos action
+     * List tags action
      *
      * @return array
      */
     public function listAction()
     {
-        $videosRepository = $this->getEntityManager()->getRepository('\Application\Entity\Video');
-
+        $tagsRepository = $this->getEntityManager()->getRepository('\Application\Entity\Tag');
+//        var_dump($tagsRepository->findAll()); exit;
         return [
-            'videos' => $videosRepository->findAll()
+            'tags' => $tagsRepository->findAll()
         ];
 
     }
 
-    /**
-     * View video Action
-     *
-     * @return array
-     */
-    public function viewAction()
-    {
-        $videoId = (int) $this->params()->fromRoute('id', 0);
-
-        return [
-            'video' => $this->getEntityManager()->find('\Application\Entity\Video', $videoId)
-        ];
-    }
-
 
     /**
-     * Edit Video
+     * Edit Tag
      *
      * @return array|\Zend\Http\Response
      */
     public function editAction()
     {
-        $videoId = (int) $this->params()->fromRoute('id', 0);
+        $tagId = (int) $this->params()->fromRoute('id', 0);
         $entityManager = $this->getEntityManager();
-        /** @var Video $video */
-        $video = $entityManager->find('\Application\Entity\Video', $videoId);
-        $form = new EditVideo($video);
-
+        /** @var Tag $tag */
+        $tag = $entityManager->find('\Application\Entity\Tag', $tagId);
+        $form = new EditTag(array('tag' => $tag));
+//        var_dump($form); exit;
         $request = $this->getRequest();
-        if ($request->isPost()) {
+        if ($request->isPost() && $form->isValid($request->getPost()->toArray())) {
 
-            $form->setInputFilter($video->getInputFilter());
-            $form->setData($request->getPost());
-            if ($form->isValid()) {
-                $form->persistData();
-                $entityManager->persist($video);
-                $entityManager->flush();
-                return $this->redirect()->toRoute('video-list');
-            }
+            $form->persistData();
+            $entityManager->persist($tag);
+            $entityManager->flush();
+            return $this->redirect()->toRoute('tag-list');
         }
         return array(
             'form' => $form,
-            'video' => $video,
+            'tag' => $tag,
         );
     }
 

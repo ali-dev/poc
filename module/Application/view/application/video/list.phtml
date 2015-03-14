@@ -6,14 +6,44 @@
                 <h3 class="panel-title">Speakaboos Videos</h3>
             </div>
             <div class="panel-body">
-                <?php foreach($this->videos as $video):?>
-                    <p>
-                        <a href="<?php echo $this->url('video-view', array('id' => $video->getId()))?>">
-                            <?php echo $video->getTitle();?>
-                        </a>
-                    </p>
-<!--                    <p><a class="btn btn-success pull-right" href="http://framework.zend.com/zf2" target="_blank">--><?php //echo $this->translate('ZF2 Development Portal') ?><!-- &raquo;</a></p>-->
-                <?php endforeach; ?>
+                <table class="table" data-toggle="table">
+                    <thead>
+                        <tr>
+                            <th>Video Title</th>
+                            <th>Tags</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    <?php foreach($this->videos as $video):?>
+
+                        <tr>
+                            <td>
+                                <a href="<?php echo $this->url('video-view', array('id' => $video->getId()))?>">
+                                    <?php echo $video->getTitle();?>
+                                </a>
+                            </td>
+                            <td>
+                                <?php
+                                $videoTags = $video->getVideoTags()->toArray();
+                                $tags = '';
+                                foreach($videoTags as $key => $videoTag){
+                                    $tags .= $videoTag->getTag()->getName();
+                                    if (next($videoTags)==true) $tags .= ", ";
+                                }
+                                echo $tags;
+                                ?>
+                            </td>
+                            <td>
+                                <a href="<?php echo $this->url('video-edit', array('id' => $video->getId()))?>">Edit</a>
+                                -
+                                Delete
+                            </td>
+
+                        </tr>
+                    <?php endforeach; ?>
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>

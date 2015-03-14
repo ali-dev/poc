@@ -1,7 +1,9 @@
 <?php
 namespace Application\Fixture;
 
+use Application\Entity\Tag;
 use \Application\Entity\Video;
+use Application\Entity\VideoTag;
 use \Doctrine\Common\Persistence\ObjectManager;
 use \Doctrine\Common\DataFixtures\FixtureInterface;
 
@@ -24,13 +26,32 @@ class LoadFixturesData implements FixtureInterface
             $video = new Video();
             $video->setTitle("Speakaboos Video {$i}")
                   ->setVideoFileName('small')
-                  ->setVttFileName('test-vtt.vtt');
+                  ->setVttFileName('vtt-test.vtt');
 
             $manager->persist($video);
-            echo ".";
         }
-
+        echo "Saving Videos \n";
         $manager->flush();
+        for($i = 1; $i < 10; $i++) {
+            $tag = new Tag();
+            $tag->setName("Tag {$i}");
+
+            $manager->persist($tag);
+
+        }
+        echo "Saving Tags \n";
+        $manager->flush();
+
+        $videosRepository = $manager->getRepository('\Application\Entity\Video');
+        foreach($videosRepository->findAll() as $video) {
+            $videoTag = new VideoTag();
+            $videoTag->setVideo($video);
+            $videoTag->setTag($tag);
+            $manager->persist($videoTag);
+        }
+        echo "Saving VideoTags \n";
+        $manager->flush();
+
     }
 
 }

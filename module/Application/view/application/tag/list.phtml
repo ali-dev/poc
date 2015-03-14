@@ -1,0 +1,32 @@
+
+<div class="row">
+
+    <div class="col-md-2">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">Tags</h3>
+            </div>
+            <div class="panel-body">
+                <table class="table" data-toggle="table">
+                    <thead>
+                    <tr>
+                        <th>Tag Name</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <?php foreach($this->tags as $tag): ?>
+                        <tr>
+                            <td>
+                                <a href="<?php echo $this->url('tag-edit', array('id' => $tag->getId()))?>">
+                                    <?php  echo $tag->getName();?>
+                                </a>
+                            </td>
+                        </tr>
+                    <?php endforeach; ?>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+

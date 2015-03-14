@@ -5,7 +5,13 @@
                 <h3 class="panel-title"><?php echo $this->video->getTitle();?></h3>
             </div>
             <div class="panel-body">
-
+                <video  controls width="100%">
+                    <source src="http://techslides.com/demos/sample-videos/<?php echo $this->video->getVideoFileName();?>.mp4" type="video/mp4">
+                    <source src="http://techslides.com/demos/sample-videos/<?php echo $this->video->getVideoFileName();?>.webm" type="video/webm">
+                    <source src="http://techslides.com/demos/sample-videos/<?php echo $this->video->getVideoFileName();?>.ogv" type="video/ogg">
+                    <track kind="captions" label="Story" src="<?php echo $this->url('video-vtt', array('id' => $video->getId())) ?>" srclang="en" default></track>
+                    Your browser does not support the video tag.
+                </video>
             </div>
         </div>
     </div>

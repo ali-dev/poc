@@ -27,7 +27,7 @@ class UserVideo
     /**
      * @ORM\ManyToOne(targetEntity="User", inversedBy="userVideos")
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
-     * @var Video
+     * @var User
      **/
     protected $user;
 

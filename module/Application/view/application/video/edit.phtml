@@ -1,0 +1,49 @@
+<?php
+$title = 'Edit Video';
+$this->headTitle($title);
+?>
+<div class="row">
+
+    <div class="col-md-8">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title"><?php echo $this->escapeHtml($title); ?></h3>
+            </div>
+            <div class="panel-body">
+                <?php
+                $form = $this->form;
+                $form->setAttribute('action', $this->url('video-edit', array('id' => $this->video->getId())));
+                $form->prepare();
+                echo $this->form()->openTag($form);
+                ?>
+                <div class="form-group">
+                <?php
+                    echo $this->formLabel($form->get('title'));
+                    echo $this->formElement($form->get('title'));
+                ?>
+                </div>
+                <div class="form-group">
+                <?php
+                    echo $this->formLabel($form->get('videoFileName'));
+                    echo $this->formElement($form->get('videoFileName'));
+                ?>
+                </div>
+                <div class="form-group">
+                <?php
+                    echo $this->formLabel($form->get('vttFileName'));
+                    echo $this->formElement($form->get('vttFileName'));
+                ?>
+                </div>
+                <div class="form-group">
+                <?php
+                    echo $this->formElement($form->get('submit'));
+                    echo $this->form()->closeTag();
+                ?>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+

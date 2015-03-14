@@ -11,14 +11,10 @@ return array(
         'DoctrineModule',
         'DoctrineORMModule',
         'DoctrineDataFixtureModule',
-//        'ZfcUserDoctrineORM',
-//        'RdnDoctrine',
-//        'ScnSocialAuth',
-//        'ScnSocialAuthDoctrineORM',
         'ZfcBase',
         'ZfcUser',
         'Application',
-//        'Data'
+        'Api'
     ),
     'module_listener_options' => array(
         'module_paths' => array(
@@ -28,6 +24,5 @@ return array(
         'config_glob_paths' => array(
             'config/autoload/{,*.}{global,local}.php'
         )
-    ),
-
+    )
 );

@@ -25,10 +25,10 @@ class Tag
     protected $name;
 
     /**
-     * @ORM\OneToMany(targetEntity="videoTag", mappedBy="tag")
-     * @var VideoTag
+     * @ ORM\OneToMany(targetEntity="videoTag", mappedBy="tag")
+     *
      **/
-    private $videoTags;
+    protected $videoTags;
 
     public function __construct() {
         $this->videoTags = new ArrayCollection();
@@ -68,5 +68,29 @@ class Tag
     public function getName()
     {
         return $this->name;
+    }
+
+    /**
+     * @param \Application\Entity\VideoTag $videoTags
+     */
+    public function setVideoTags($videoTags)
+    {
+        $this->videoTags = $videoTags;
+    }
+
+    /**
+     * @return \Application\Entity\VideoTag
+     */
+    public function getVideoTags()
+    {
+        return $this->videoTags;
+    }
+
+    /**
+     * @param $videoTag
+     */
+    public function addVideoTag($videoTag)
+    {
+        $this->videoTags->add($videoTag);
     }
 }

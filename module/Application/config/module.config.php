@@ -40,6 +40,47 @@ return array(
                     ),
                 ),
             ),
+            'video-edit' => array(
+                'type'    => 'segment',
+                'options' => array(
+                    'route'    => '/video/:id/edit',
+                    'defaults' => array(
+                        'controller' => 'Application\Controller\Video',
+                        'action'     => 'edit',
+                    ),
+                ),
+            ),
+            'video-vtt' => array(
+                'type'    => 'segment',
+                'options' => array(
+                    'route'    => '/video/:id/vtt',
+                    'defaults' => array(
+                        'controller' => 'Application\Controller\Video',
+                        'action'     => 'vtt',
+                    ),
+                ),
+            ),
+
+            'tag-list' => array(
+                'type'    => 'segment',
+                'options' => array(
+                    'route'    => '/tags',
+                    'defaults' => array(
+                        'controller' => 'Application\Controller\Tag',
+                        'action'     => 'list',
+                    ),
+                ),
+            ),
+            'tag-edit' => array(
+                'type'    => 'segment',
+                'options' => array(
+                    'route'    => '/tag/:id/edit',
+                    'defaults' => array(
+                        'controller' => 'Application\Controller\Tag',
+                        'action'     => 'edit',
+                    ),
+                ),
+            ),
             // The following is a route to simplify getting started creating
             // new controllers and actions without needing to create a new
             // module. Simply drop new controllers in, and you can access them
@@ -94,7 +135,8 @@ return array(
     'controllers' => array(
         'invokables' => array(
             'Application\Controller\Index' => 'Application\Controller\IndexController',
-            'Application\Controller\Video' => 'Application\Controller\VideoController'
+            'Application\Controller\Video' => 'Application\Controller\VideoController',
+            'Application\Controller\Tag'   => 'Application\Controller\TagController',
         ),
     ),
     'view_manager' => array(
