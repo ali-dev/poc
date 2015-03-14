@@ -1,0 +1,21 @@
+<div class="row">
+
+    <div class="col-md-8">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">Speakaboos Videos</h3>
+            </div>
+            <div class="panel-body">
+                <?php foreach($this->videos as $video):?>
+                    <p>
+                        <a href="<?php echo $this->url('video-view', array('id' => $video->getId()))?>">
+                            <?php echo $video->getTitle();?>
+                        </a>
+                    </p>
+<!--                    <p><a class="btn btn-success pull-right" href="http://framework.zend.com/zf2" target="_blank">--><?php //echo $this->translate('ZF2 Development Portal') ?><!-- &raquo;</a></p>-->
+                <?php endforeach; ?>
+            </div>
+        </div>
+    </div>
+</div>
+

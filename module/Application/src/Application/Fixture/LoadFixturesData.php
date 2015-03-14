@@ -22,8 +22,10 @@ class LoadFixturesData implements FixtureInterface
     {
         for($i = 1; $i < 100; $i++) {
             $video = new Video();
-            $video->setTitle("Speakaboos Video {$i}");
-            $video->setFileName('small');
+            $video->setTitle("Speakaboos Video {$i}")
+                  ->setVideoFileName('small')
+                  ->setVttFileName('test-vtt.vtt');
+
             $manager->persist($video);
             echo ".";
         }

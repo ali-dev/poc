@@ -1,6 +1,7 @@
 <?php
 namespace Application\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -27,7 +28,31 @@ class Video
      * @ORM\Column(type="string")
      * @var string
      */
-    protected $fileName;
+    protected $videoFileName;
+
+    /**
+     * @ORM\Column(type="string")
+     * @var string
+     */
+    protected $vttFileName;
+
+    /**
+     * @ORM\OneToMany(targetEntity="VideoTag", mappedBy="video")
+     * @var VideoTag
+     **/
+    private $videoTags;
+
+    /**
+     * @ORM\OneToMany(targetEntity="UserVideo", mappedBy="video")
+     * @var VideoTag
+     **/
+    private $userVideos;
+
+
+    public function __construct() {
+        $this->videoTags = new ArrayCollection();
+        $this->userVideos = new ArrayCollection();
+    }
 
     /**
      * @param int $id
@@ -69,18 +94,46 @@ class Video
      * @param string $fileName
      * @return $this
      */
-    public function setFileName($fileName)
+    public function setVideoFileName($fileName)
     {
-        $this->fileName = $fileName;
+        $this->videoFileName = $fileName;
+        return $this;
+    }
+
+    /**
+     * @param string $vttFileName
+     * @return $this;
+     */
+    public function setVttFileName($vttFileName)
+    {
+        $this->vttFileName = $vttFileName;
         return $this;
     }
 
     /**
      * @return string
      */
-    public function getFileName()
+    public function getVttFileName()
     {
-        return $this->fileName;
+        return $this->vttFileName;
+    }
+
+
+
+    /**
+     * @return string
+     */
+    public function getVideoFileName()
+    {
+        return $this->videoFileName;
+    }
+
+    /**
+     * @param $videoTag
+     */
+    public function addVideoTag($videoTag)
+    {
+        $this->videoTags->add($videoTag);
     }
 
 
