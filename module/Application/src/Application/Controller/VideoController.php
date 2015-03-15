@@ -47,7 +47,7 @@ class VideoController extends AbstractActionController
 
 
     /**
-     * Edit Video
+     * Edit Video Action
      *
      * @return array|\Zend\Http\Response
      */

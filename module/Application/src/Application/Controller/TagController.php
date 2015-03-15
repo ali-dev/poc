@@ -23,7 +23,6 @@ class TagController extends AbstractActionController
     public function listAction()
     {
         $tagsRepository = $this->getEntityManager()->getRepository('\Application\Entity\Tag');
-//        var_dump($tagsRepository->findAll()); exit;
         return [
             'tags' => $tagsRepository->findAll()
         ];
@@ -43,10 +42,9 @@ class TagController extends AbstractActionController
         /** @var Tag $tag */
         $tag = $entityManager->find('\Application\Entity\Tag', $tagId);
         $form = new EditTag(array('tag' => $tag));
-//        var_dump($form); exit;
+
         $request = $this->getRequest();
         if ($request->isPost() && $form->isValid($request->getPost()->toArray())) {
-
             $form->persistData();
             $entityManager->persist($tag);
             $entityManager->flush();

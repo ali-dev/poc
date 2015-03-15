@@ -20,24 +20,4 @@ class IndexController extends AbstractActionController
         return new ViewModel();
     }
 
-    public function videosAction()
-    {
-        $entityManager = $this
-            ->getServiceLocator()
-            ->get('Doctrine\ORM\EntityManager');
-        $videosRepository = $entityManager->getRepository('\Application\Entity\Video');
-        $videos = $videosRepository->findAll();
-
-
-        return [
-            'videos' => $videos
-        ];
-
-    }
-
-    public function viewAction()
-    {
-        var_dump((int) $this->params()->fromRoute('id', 0));
-        exit;
-    }
 }

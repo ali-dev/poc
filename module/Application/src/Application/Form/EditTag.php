@@ -46,71 +46,10 @@ class EditTag extends \Zend_Form
         );
         $view = new \Zend_View();
         $view->addScriptPath(ROOT_PATH.'/modules/Application/view/application/tag');
-//        $view->addBasePath(APPLICATION_SCRIPT_PATH);
-//        $replyForm = new Form_MailReply();
         $this->setView($view);
 
     }
-//    /**
-//     * constructor
-//     */
-//    public function __construct()
-//    {
-//        $this->tag = $tag;
-//        parent::__construct('editTag');
-//        $this->setAttributes(
-//            array(
-//                'method' => 'post',
-//                'class'  => 'form-horizontal',
-//            )
-//        );
-//        $this->add(array(
-//            'name' => 'name',
-//            'attributes' => array(
-//                'type'  => 'text',
-//                'value' => $this->getVideo()->getTitle(),
-//                'class' => 'form-control'
-//            ),
-//            'options' => array(
-//                'label' => 'Title',
-//                'class' => 'col-sm-2 control-label'
-//            ),
-//        ));
-//        $this->add(array(
-//            'name' => 'videoFileName',
-//            'attributes' => array(
-//                'type'  => 'text',
-//                'value' => $this->getVideo()->getVideoFileName(),
-//                'class' => 'form-control'
-//            ),
-//            'options' => array(
-//                'label' => 'Video Filename',
-//            ),
-//        ));
-//
-//        $this->add(array(
-//            'name' => 'vttFileName',
-//            'attributes' => array(
-//                'type'  => 'text',
-//                'value' => $this->getVideo()->getVttFileName(),
-//                'class' => 'form-control'
-//            ),
-//            'options' => array(
-//                'label' => 'WebVTT Filename',
-//            ),
-//        ));
-//
-//
-//        $this->add(array(
-//            'name' => 'submit',
-//            'attributes' => array(
-//                'class' => 'btn',
-//                'type'  => 'submit',
-//                'value' => 'Submit',
-//                'id' => 'submitbutton',
-//            ),
-//        ));
-//    }
+
 
     /**
      * @param Tag $tag
