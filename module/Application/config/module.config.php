@@ -181,5 +181,17 @@ return array(
     ),
     'data-fixture' => array(
         'location' => __DIR__ . '/../src/Application/Fixture',
-    )
+    ),
+    'solarium' => array(
+        'endpoint' => array(
+            'default' => array(
+                'host' => 'localhost',
+                'port' => 8983,
+                'path' => '/solr',
+                'core' => 'default',
+                'timeout' => 5
+            )
+            //...
+        )
+    ),
 );

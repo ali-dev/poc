@@ -13,6 +13,7 @@ return array(
         'DoctrineDataFixtureModule',
         'ZfcBase',
         'ZfcUser',
+        'EwgoSolarium',
         'Application',
         'Api'
     ),

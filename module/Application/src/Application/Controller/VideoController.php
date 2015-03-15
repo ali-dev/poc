@@ -23,6 +23,8 @@ class VideoController extends AbstractActionController
      */
     public function listAction()
     {
+//        $client = $this->serviceLocator->get('Solarium\Client');
+//        var_dump($client); exit;
         $videosRepository = $this->getEntityManager()->getRepository('\Application\Entity\Video');
 
         return [
