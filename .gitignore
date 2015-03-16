@@ -8,3 +8,7 @@ nbproject
 vendor
 .vagrant/*
 html
+config/solr/
+data/files/
+data/DoctrineORMModule/
+zf

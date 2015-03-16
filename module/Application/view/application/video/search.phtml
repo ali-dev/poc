@@ -1,0 +1,37 @@
+<div class="row">
+
+    <div class="col-md-8">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title"><?php $this->resultSet->getNumFound()?> Videos found</h3>
+            </div>
+            <div class="panel-body">
+
+                <table class="table" data-toggle="table">
+                    <thead>
+                    <tr>
+                        <th>Video Title</th>
+                        <th>Match score</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <?php foreach($this->resultSet as $document):?>
+
+                        <tr>
+                            <td>
+                                <?php echo $document->title;?>
+
+                            </td>
+                            <td>
+                                <?php echo $document->score ?>
+                            </td>
+
+                        </tr>
+                    <?php endforeach; ?>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+

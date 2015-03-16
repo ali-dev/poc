@@ -9,10 +9,12 @@
 
 namespace Application;
 
+use Zend\ModuleManager\Feature\ConsoleUsageProviderInterface;
+use Zend\Console\Adapter\AdapterInterface as Console;
 use Zend\Mvc\ModuleRouteListener;
 use Zend\Mvc\MvcEvent;
 
-class Module
+class Module implements ConsoleUsageProviderInterface
 {
     public function onBootstrap(MvcEvent $e)
     {
@@ -34,6 +36,17 @@ class Module
                     __NAMESPACE__ => __DIR__ . '/src/' . __NAMESPACE__,
                 ),
             ),
+        );
+    }
+
+    public function getConsoleUsage(Console $console)
+    {
+        return array(
+            // Describe available commands
+            'solr export-videos [--verbose|-v]'    => 'Export videos to solr',
+
+            // Describe expected parameters
+            array( '--verbose|-v',     '(optional) turn on verbose mode'        ),
         );
     }
 }

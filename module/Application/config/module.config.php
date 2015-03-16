@@ -50,6 +50,16 @@ return array(
                     ),
                 ),
             ),
+            'video-search' => array(
+                'type'    => 'segment',
+                'options' => array(
+                    'route'    => '/video/search',
+                    'defaults' => array(
+                        'controller' => 'Application\Controller\Video',
+                        'action'     => 'search',
+                    ),
+                ),
+            ),
             'video-vtt' => array(
                 'type'    => 'segment',
                 'options' => array(
@@ -160,6 +170,15 @@ return array(
     'console' => array(
         'router' => array(
             'routes' => array(
+                'export-videos-to-solr' => array(
+                    'options' => array(
+                        'route'    => 'solr export-videos [--verbose|-v] ',
+                        'defaults' => array(
+                            'controller' => 'Application\Controller\Video',
+                            'action'     => 'exporttosolr'
+                        )
+                    )
+                )
             ),
         ),
     ),
@@ -188,7 +207,7 @@ return array(
                 'host' => 'localhost',
                 'port' => 8983,
                 'path' => '/solr',
-                'core' => 'default',
+                'core' => 'testing',
                 'timeout' => 5
             )
             //...

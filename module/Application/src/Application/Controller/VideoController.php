@@ -23,8 +23,6 @@ class VideoController extends AbstractActionController
      */
     public function listAction()
     {
-//        $client = $this->serviceLocator->get('Solarium\Client');
-//        var_dump($client); exit;
         $videosRepository = $this->getEntityManager()->getRepository('\Application\Entity\Video');
 
         return [
@@ -101,6 +99,61 @@ class VideoController extends AbstractActionController
 
 
         return $this->response;
+    }
+
+    /**
+     * Solr Search - search videos by title
+     */
+    public function searchAction()
+    {
+        $searchTerm = $this->params()->fromPost('term');
+        /** @var \Solarium\Client $client */
+        $client = $this->serviceLocator->get('Solarium\Client');
+
+        // get a select query instance
+        $query = $client->createSelect();
+        $query->setQuery($searchTerm);
+        $query->setRows(1000);
+        // this executes the query and returns the result
+        $resultSet = $client->select($query);
+        ;
+
+
+
+        return ['resultSet' => $resultSet];
+
+    }
+
+    public function exportToSolrAction()
+    {
+        /** @var \Solarium\Client $client */
+        $client = $this->serviceLocator->get('Solarium\Client');
+
+        $update = $client->createUpdate();
+
+        $videosRepository = $this->getEntityManager()->getRepository('\Application\Entity\Video');
+        $docs = [];
+        foreach($videosRepository->findAll() as $video) {
+            // create Solr documents
+            // create a new document for the data
+            $doc = $update->createDocument();
+
+            $doc->id = $video->getId();
+            $doc->title = $video->getTitle();
+
+            $docs[] = $doc;
+
+        }
+        $update->addDocuments($docs);
+
+        $update->addCommit();
+
+        // this executes the query and returns the result
+        $result = $client->update($update);
+        echo '<b>Update query executed</b><br/>';
+        echo 'Query status: ' . $result->getStatus(). '<br/>';
+        echo 'Query time: ' . $result->getQueryTime();
+        exit;
     }
 
     /**
